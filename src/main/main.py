@@ -60,6 +60,8 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) == 2 and all(row):
                 cursor.execute(insert_user, row)
+                contents = cursor.execute("SELECT * FROM users").fetchall()
+                print(contents)
 
     print()
 
