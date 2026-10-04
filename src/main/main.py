@@ -58,7 +58,7 @@ def load_and_clean_users(file_path):
     with open(file_path, newline="") as file:
         reader = csv.reader(file, delimiter=',')
         for row in reader:
-            if len(row == 2) and all(row):
+            if len(row) == 2 and all(row):
                 cursor.execute(insert_user, row)
 
     print()
