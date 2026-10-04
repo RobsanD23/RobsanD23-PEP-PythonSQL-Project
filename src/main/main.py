@@ -57,7 +57,7 @@ def load_and_clean_users(file_path):
     df = pd.read_csv(file_path, sep=',')
     df.dropna(how = 'any')
     df.to_sql('users', conn)
-    print("This is the users dataframe", df)
+    print("\n\n\nThis is the users dataframe", df,"\n\n\n")
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
