@@ -60,7 +60,7 @@ def load_and_clean_users(file_path):
         headers = next(reader)
         print("Headers: ", headers)
         for row in reader:
-            if len(row) == 2 and all(row):
+            if len(row) == 2 and all(value.strip() for value in row):
                 cursor.execute(insert_user, row)
                 contents = cursor.execute("SELECT * FROM users").fetchall()
                 print(contents)
