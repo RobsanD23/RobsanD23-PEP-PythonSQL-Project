@@ -92,7 +92,7 @@ def write_user_analytics(csv_file_path):
             SELECT userId, AVG(endTime - startTime) AS avgCallTime, COUNT(*) AS numCalls
             FROM callLogs
             GROUP BY userId
-            ORDER BY numCalls DESC
+            ORDER BY numCalls
             """
         ).fetchall()
         writer.writerows(content)
