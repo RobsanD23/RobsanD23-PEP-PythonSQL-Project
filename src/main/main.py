@@ -62,6 +62,7 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) == 2 and all(value.strip() for value in row):
                 cursor.execute(insert_user, row)
+                print(row)
     print("load_users executed")
 
 
@@ -84,14 +85,14 @@ def load_and_clean_call_logs(file_path):
 # You must save records consisting of each userId, avgDuration, and numCalls
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
-    with open(csv_file_path) as file:
-        writer = csv.writer(file)
+    with open(csv_file_path, 'w',newline="") as file:
+        writer = csv.writer(file, delimiter=",")
         content = cursor.execute(
             """
             SELECT userId, AVG(endTime - startTime) AS avgCallTime, COUNT(*) AS numCalls
             FROM callLogs
             GROUP BY userId
-            ORDER BY numCalls
+            ORDER BY numCalls DESC
             """
         ).fetchall()
         writer.writerows(content)
