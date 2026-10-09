@@ -114,7 +114,7 @@ def write_ordered_calls(csv_file_path):
         ).fetchall()
         print(content)
         writer.writerows(content)
-    print("TODO: write_ordered_calls")
+    print("write_ordered_calls executed")
 
 
 
