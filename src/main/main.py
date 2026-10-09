@@ -93,7 +93,7 @@ def write_user_analytics(csv_file_path):
             GROUP BY userId
             ORDER BY numCalls
             """
-        ).fetchAll()
+        ).fetchall()
         writer.writeRows(content)
     print("TODO: write_user_analytics")
 
