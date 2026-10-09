@@ -94,7 +94,7 @@ def write_user_analytics(csv_file_path):
             ORDER BY numCalls
             """
         ).fetchall()
-        writer.writeRows(content)
+        writer.writerows(content)
     print("TODO: write_user_analytics")
 
 
