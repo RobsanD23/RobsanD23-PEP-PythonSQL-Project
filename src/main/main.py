@@ -62,6 +62,7 @@ def load_and_clean_users(file_path):
         for row in reader:
             if len(row) == 2 and all(value.strip() for value in row):
                 cursor.execute(insert_user, row)
+    print("load_users executed")
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
@@ -76,14 +77,24 @@ def load_and_clean_call_logs(file_path):
                 cursor.execute(insert_call, row)
                 print(row)
 
-    print("TODO: load_call_logs")
+    print("load_call_logs executed")
 
 
 # This function will write analytics data to testUserAnalytics.csv - average call time, and number of calls per user.
 # You must save records consisting of each userId, avgDuration, and numCalls
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
-
+    with open(csv_file_path) as file:
+        writer = csv.writer(file)
+        content = cursor.execute(
+            """
+            SELECT userId, AVG(endTime - startTime) AS avgCallTime, COUNT(*) AS numCalls
+            FROM callLogs
+            GROUP BY userId
+            ORDER BY numCalls
+            """
+        ).fetchAll()
+        writer.writeRows(content)
     print("TODO: write_user_analytics")
 
 
